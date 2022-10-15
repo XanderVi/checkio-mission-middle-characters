@@ -8,13 +8,18 @@
     <img  title="Middle characters" src="{{MEDIA}}middle.png" alt="example" style="max-height: 240px"/>
 </p>
 
+<p>
+    Если ты хочешь больше попрактиковаться с подобным заданием, попробуй миссию
+    <a target="_blank" href="https://py.checkio.org/mission/median/share/f9d8532315579ccdff91d0a45935a809/">Median</a>.
+</p>
+
 <!-- Explain input and output values -->
 <p>
-    <strong>Входные данные: </strong> Строка.
+    <strong>Входные данные:</strong> Строка.
 </p>
 
 <p>
-    <strong>Выходные данные: </strong> Средние символы.
+    <strong>Выходные данные:</strong> Средние символы.
 </p>
 
 
@@ -23,32 +28,18 @@
 <p>
 <strong>Примеры:</strong>
 </p>
-{% if interpreter.slug == "js-node" %}
-<pre class="brush: javascript">middle('example') == 'm'
-middle('test') == 'es'
-middle('very-very long sentence') == 'o'
-middle('I') == 'I'
-middle('no') == 'no'
-</pre>
-{% else %}
-<pre class="brush: python">middle('example') == 'm'
-middle('test') == 'es'    
-middle('very-very long sentence') == 'o'
-middle('I') == 'I'
-middle('no') == 'no'
-</pre>
-{% endif %}
+<pre class="brush: {% if is_js %}javascript{% else %}python{% endif %}">{{init_code_tmpl}}</pre>
 </div>
 
 <!-- Here you can explain how it can be used in development and what is usage of this. -->
 <!-- The section is optional -->
 <p class="for_info_only">
-    <strong>Как это используется: </strong>
-    Для работы с текстами.
+    <strong>Как это используется:</strong>
+    <i>для работы с текстами.</i>
 </p>
 
 <!-- Here you can explain some constraints for input-->
 <!-- The section is optional -->
-<p><strong>Предусловия</strong>:<br>
-    1 <= длина строки <= 100
+<p><strong>Предусловие:</strong>
+    <i>1 <= длина строки <= 100/</i>
 </p>
