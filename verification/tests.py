@@ -11,34 +11,34 @@ Each test is a dict with
 TESTS = {
     "Basics": [
         {
-            "input": 'example',
-            "answer": 'm'
+            "input": ['example'],
+            "answer": 'm',
         },
         {
-            "input": 'test',
-            "answer": 'es'
-        }
+            "input": ['test'],
+            "answer": 'es',
+        },
     ],
     "Extra": [
         {
-            "input": '    few whitespaces   ',
-            "answer": 'it'
+            "input": ['    few whitespaces   '],
+            "answer": 'it',
         },
         {
-            "input": 'very-very long sentence',
-            "answer": 'o'
+            "input": ['very-very long sentence'],
+            "answer": 'o',
         },
 	{
-            "input": 'symbols are: !@#$%^&*()=',
-            "answer": ': '
+            "input": ['symbols are: !@#$%^&*()='],
+            "answer": ': ',
         },
 	{
-            "input": '*',
-            "answer": '*'
+            "input": ['*'],
+            "answer": '*',
         },
 	{
-            "input": 'Hi',
-            "answer": 'Hi'
-        }
+            "input": ['Hi'],
+            "answer": 'Hi',
+        },
     ]
 }

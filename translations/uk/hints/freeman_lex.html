@@ -1,0 +1,136 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        <i>Я уявлення не маю, як почати розв'язувати цю місію.</i>
+    </div>
+    <div class="answer">
+        <p>
+            З точки зору цього розв'язку, це місія про індексування і зрізування. Ідея у знаходженні середнього індексу (або двох) і повернення відповідних символів як зрізу з <b class="code">text</b>.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>Добре, то з чого мені почати?</i>
+    </div>
+    <div class="answer">
+        <p>
+            Тобі точно знадобиться довжина <b class="code">text</b>. Знайди її з допомогою рядкової функції <a target="_blank" href="https://www.w3schools.com/python/gloss_python_string_length.asp">len(str)</a>.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>
+            Як знайти середній індекс (або два)?
+        </i>
+    </div>
+    <div class="answer">
+        <p>
+            У цьому випадку вбудована функція <a target="_blank" href="https://www.w3schools.com/python/ref_func_divmod.asp">divmod()</a> буде дуже корисною тобі. Вона повертає частку (індекс) і залишок від ділення. Тобі потрібно поділити довжину <b class="code">text</b> (яку ти вже знаєш як шукати) на <b class="code">2</b>.
+        </p>
+        <pre class="brush: python">
+ind, rem = divmod(len(text), 2)
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>
+            Я не розумію, як відібрати символи, маючи індекс і залишок.
+        </i>
+    </div>
+    <div class="answer">
+        <p>
+            Давай думати разом. Якщо ти маєш рядок із непарною кількістю символів, наприклад, 5,
+            твій <b class="code">ind</b> буде <b class="code">2</b> і <b class="code">rem</b> - <b class="code">1</b>. Знаючи, що відлік елементів сукупності починається з 0 в Python, символ з індексом 2 це насправді третій символ - в рядку із п'яти символів це той середній елемент, який ти шукаєш. Тож, якщо <b class="code">rem == 1</b> (непарна кількість символів) результат функції це <b class="code">text[ind]</b>.
+        </p>
+        <pre class="brush: python">
+ind, rem = divmod(len(text), 2)
+result = text[ind] if rem == 1 else ...
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>
+            Допоможи мені завершити вираз умови!
+        </i>
+    </div>
+    <div class="answer">
+        <p>
+            Якщо ти повториш логіку попередньої підказки для рядка з парною кількістю символів, то з'ясуєш, що тобі потрібні символи з індексами <b class="code">ind</b> і <b class="code">ind - 1</b>. Після прочитання про <a target="_blank" href="https://www.w3schools.com/python/python_strings_slicing.asp">зрізи рядків</a> ти маєш змогти створити підрядок з <b class="code">text</b> з цими двома символами. Це і буде результатом функції для рядка з парною кількістю символів (<b class="code">rem == 0</b>).
+        </p>
+        <pre class="brush: python">
+ind, rem = divmod(len(text), 2)
+result = text[ind] if rem == 1 else text[ind-1: ind+1]
+        </pre>
+        <p>
+            Ти можеш використати <b class="code">rem</b> як індекс, а варіанти - як елементи кортежу і переписати вираз <b class="code">result</b>.
+        </p>
+        <pre class="brush: python">
+result = (text[ind-1: ind+1], text[ind])[rem]       
+        </pre>
+        <p>
+            Ти можеш навіть виявити таке цікаве представлення виразу <b class="code">result</b>, якщо модифікувати нижню межу зрізу з <b class="code">rem</b>.
+        </p>
+        <pre class="brush: python">
+result = text[ind+rem-1: ind+1]
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>То як має виглядати моє остаточне рішення?</i>
+    </div>
+    <div class="answer">
+        <p>
+            Тобі залишилося обгорнути свій код у вираз функції і повернути <b class="code">result</b> своїх розрахунків.
+        </p>
+        <p>Ось повний розв'язок:</p>
+        <pre class="brush: python">
+def middle(text: str) -> str:
+
+    ind, rem = divmod(len(text), 2)
+    result = text[ind+rem-1: ind+1]
+        
+    return result
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>Покажи мені більше розв'язків!<br />
+        Адже я хочу стати справжнім Python Ніндзею!</i>
+    </div>
+    <div class="answer">
+        <p>Звісно, тримай!</p>
+        <p>
+            Рекурсивно створюй нові рядки з <b class="code">text</b> без першого і останнього символів допоки його довжина не стане 1-2 символи.
+        </p>
+        <pre class="brush: python">
+def middle(text: str) -> str:
+
+    return text if len(text) < 3 else middle(text[1:-1])
+        </pre>
+        <p>
+            Цей короткий вираз використовує багато інструментів: вираз <b class="code">lambda</b> (анонімна функція), "моржовий" оператор <b class="code">:=</b>, який дозволяє проголосити змінну з початковим значенням при першому використанні, оператор цілочисельного ділення <b class="code">//</b> і оператор <b class="code">~</b>. 
+        </p>
+        <p>
+            Якщо значення <b class="code">l</b> наприклад <b class="code">2</b>, ти насправді береш третій символ від початку рядка. Оператор <b class="code">~</b> дозволяє тобі взяти дійсний третій символ від кінця рядка. Для рядків із непарною кількістю символів, це буде один і той же символ. Дізнайся більше у цьому <a target="_blank" href="https://py.checkio.org/mission/median/publications/veky/python-3/both-sides/share/63e9bd8840f814430eb543a064990714/#comment-23114">поясненні</a>.
+        </p>
+        <pre class="brush: python">
+middle = lambda text: text[~(l:=(len(text)//2)): l+1]
+        </pre>
+        <p><b>Тисни "Best solutions" в меню місії і побачиш багато інших цікавих розв'язків!</b></p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        <i>Дякую! Тепер я знаю і розумію більше! Все працює як слід!</i>
+    </div>
+    <div class="answer">
+        Приємно це чути!
+    </div>
+</div>
+</body>
